@@ -1,18 +1,18 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-const path = require("path");
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const CopyWebpackPlugin = require("copy-webpack-plugin");
-const TerserPlugin = require("terser-webpack-plugin");
+const path = require('path');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
-const isProd = process.env.NODE_ENV === "production";
+const isProd = process.env.NODE_ENV === 'production';
 
 const babelOptions = {
   presets: [
     [
-      "@babel/preset-env",
+      '@babel/preset-env',
       {
-        targets: "last 2 versions, ie 11",
+        targets: 'last 2 versions, ie 11',
         modules: false,
       },
     ],
@@ -20,13 +20,13 @@ const babelOptions = {
 };
 
 const config = {
-  mode: isProd ? "production" : "development",
-  context: path.resolve(__dirname, "./src"),
-  entry: "./index.ts",
+  mode: isProd ? 'production' : 'development',
+  context: path.resolve(__dirname, './src'),
+  entry: './index.ts',
 
   output: {
-    path: path.resolve(__dirname, "dist"),
-    filename: "bundle.js",
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'bundle.js',
   },
 
   module: {
@@ -36,11 +36,11 @@ const config = {
         exclude: /node_modules/,
         use: [
           {
-            loader: "babel-loader",
+            loader: 'babel-loader',
             options: babelOptions,
           },
           {
-            loader: "ts-loader",
+            loader: 'ts-loader',
           },
         ],
       },
@@ -48,19 +48,19 @@ const config = {
         test: /\.html$/,
         use: [
           {
-            loader: "html-loader",
+            loader: 'html-loader',
           },
         ],
       },
       {
         test: /\.css$/,
-        use: ["style-loader", "css-loader"],
+        use: ['style-loader', 'css-loader'],
       },
     ],
   },
 
   resolve: {
-    extensions: [".ts", ".js"],
+    extensions: ['.ts', '.js'],
   },
 
   optimization: {
@@ -80,26 +80,26 @@ const config = {
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      template: "index.html",
+      template: 'index.html',
       inject: true,
-      title: "Phaser Webpack Template",
-      appMountId: "app",
-      filename: "index.html",
-      inlineSource: ".(js|css)$",
+      title: 'Phaser Webpack Template',
+      appMountId: 'app',
+      filename: 'index.html',
+      inlineSource: '.(js|css)$',
       minify: false,
     }),
     new CopyWebpackPlugin({
       patterns: [
         {
-          from: "assets",
-          to: "assets",
+          from: 'assets',
+          to: 'assets',
         },
       ],
     }),
   ],
 
   devServer: {
-    contentBase: path.join(__dirname, "dist"),
+    contentBase: path.join(__dirname, 'dist'),
     port: 5000,
     inline: true,
     hot: true,

@@ -7,7 +7,7 @@
     {
       "language": "typescript",
       "autoFix": true
-    }
+    },
   ],
   "[javascript]": {
     "editor.formatOnSave": false
@@ -17,5 +17,5 @@
   },
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
-  }
+  },
 }
