@@ -6,10 +6,6 @@ import { Text } from './text';
 
 export class Player extends Actor {
   private keys: any;
-  private keyW: Input.Keyboard.Key;
-  private keyA: Input.Keyboard.Key;
-  private keyS: Input.Keyboard.Key;
-  private keyD: Input.Keyboard.Key;
   private keySpace: Input.Keyboard.Key;
   private hpValue: Text;
 
@@ -17,11 +13,7 @@ export class Player extends Actor {
     super(scene, x, y, 'king');
 
     // KEYS
-    this.keys = this.scene.input.keyboard.addKeys('W, A, S, D, 38');
-    this.keyW = this.scene.input.keyboard.addKey('W' || 38);
-    this.keyA = this.scene.input.keyboard.addKey('A');
-    this.keyS = this.scene.input.keyboard.addKey('S');
-    this.keyD = this.scene.input.keyboard.addKey('D');
+    this.keys = this.scene.input.keyboard.addKeys('W, A, S, D, LEFT,RIGHT,UP,DOWN');
     this.keySpace = this.scene.input.keyboard.addKey(32);
     this.keySpace.on('down', (event: KeyboardEvent) => {
       this.anims.play('attack', true);
@@ -45,26 +37,30 @@ export class Player extends Actor {
   }
 
   update(): void {
+    const W = this.keys.W?.isDown || this.keys.UP?.isDown;
+    const A = this.keys.A?.isDown || this.keys.LEFT?.isDown;
+    const S = this.keys.S?.isDown || this.keys.DOWN?.isDown;
+    const D = this.keys.D?.isDown || this.keys.RIGHT?.isDown;
     this.getBody().setVelocity(0);
 
-    if (this.keys.W?.isDown) {
+    if (W) {
       this.body.velocity.y = -110;
       !this.anims.isPlaying && this.anims.play('run', true);
     }
 
-    if (this.keys.A?.isDown) {
+    if (A) {
       this.body.velocity.x = -110;
       this.checkFlip();
       this.getBody().setOffset(48, 15);
       !this.anims.isPlaying && this.anims.play('run', true);
     }
 
-    if (this.keys.S?.isDown) {
+    if (S) {
       this.body.velocity.y = 110;
       !this.anims.isPlaying && this.anims.play('run', true);
     }
 
-    if (this.keys.D?.isDown) {
+    if (D) {
       this.body.velocity.x = 110;
       this.checkFlip();
       this.getBody().setOffset(15, 15);
