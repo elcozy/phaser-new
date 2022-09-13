@@ -17,7 +17,10 @@ export class LoadingScene extends Scene {
       key: 'tiles',
       url: 'tilemaps/tiles/dungeon-16-16.png',
     });
+
     this.load.tilemapTiledJSON('dungeon', 'tilemaps/json/dungeon.json');
+
+    this.load.tilemapTiledJSON('level1', 'tilemaps/json/level1.json');
 
     // CHEST LOADING
     this.load.spritesheet('tiles_spr', 'tilemaps/tiles/dungeon-16-16.png', {

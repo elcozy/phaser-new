@@ -21,7 +21,7 @@ export class Level1 extends Scene {
 
   create(): void {
     this.initMap();
-    this.player = new Player(this, 100, 100);
+    this.player = new Player(this, 100, 150);
     this.initChests();
     this.initEnemies();
     this.initCamera();
@@ -34,7 +34,8 @@ export class Level1 extends Scene {
   }
 
   private initMap(): void {
-    this.map = this.make.tilemap({ key: 'dungeon', tileWidth: 16, tileHeight: 16 });
+    // this.map = this.make.tilemap({ key: 'dungeon', tileWidth: 16, tileHeight: 16 });
+    this.map = this.make.tilemap({ key: 'level1' });
     this.tileset = this.map.addTilesetImage('dungeon', 'tiles');
     this.groundLayer = this.map.createLayer('Ground', this.tileset, 0, 0);
     this.wallsLayer = this.map.createLayer('Walls', this.tileset, 0, 0);
